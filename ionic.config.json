@@ -1,0 +1,7 @@
+{
+  "name": "video-tutorials-app-list",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
