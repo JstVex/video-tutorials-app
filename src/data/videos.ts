@@ -3,6 +3,7 @@ export interface Video {
     title: string;
     description: string;
     date?: string;
+    detailedDescription?: string;
     videoId: string;
     thumbNail: string;
 }

@@ -36,7 +36,15 @@ function ViewVideo() {
                                 <h1 className="title">{video?.title}</h1>
                                 <p className="date">{video?.date}</p>
                             </div>
-                            <p className="description">{video?.description}</p>
+                            {video?.detailedDescription ?
+                                <p className="description">
+                                    {video?.detailedDescription}
+                                </p>
+                                :
+                                <p className="description">
+                                    {video?.description}
+                                </p>
+                            }
                         </div>
                     </div>
                 </div>
