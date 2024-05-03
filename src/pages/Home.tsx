@@ -8,6 +8,7 @@ import {
   IonRefresher,
   IonRefresherContent,
   IonRow,
+  IonSearchbar,
   IonTitle,
   IonToolbar,
   useIonViewWillEnter
@@ -19,6 +20,7 @@ import VideoListItem from '../components/VideoListItem';
 
 const Home: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
+  const [searchVideos, setSearchVideos] = useState('');
 
   useIonViewWillEnter(() => {
     const videos = getVideos();
@@ -31,11 +33,21 @@ const Home: React.FC = () => {
     }, 3000);
   };
 
+  const filteredVideos = videos.filter(video =>
+    video.title.toLowerCase().includes(searchVideos.toLowerCase())
+  );
+
   return (
     <IonPage id="home-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Video Tutorials</IonTitle>
+          <IonTitle slot="start">Video Tutorials</IonTitle>
+          <IonSearchbar
+            slot="end"
+            value={searchVideos}
+            onIonChange={e => setSearchVideos(e.detail.value!)}
+            placeholder="Search videos"
+          />
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -53,7 +65,7 @@ const Home: React.FC = () => {
 
         <IonGrid style={{ justifyItems: 'center' }}>
           <IonRow>
-            {videos.map(video => (
+            {filteredVideos.map(video => (
               <IonCol sizeXs="12" sizeSm="8" sizeMd="6" sizeLg="4" key={video.id}>
                 <VideoListItem video={video} />
               </IonCol>
